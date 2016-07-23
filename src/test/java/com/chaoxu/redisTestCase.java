@@ -9,6 +9,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
 import java.util.List;
 
@@ -20,13 +21,16 @@ import java.util.List;
 public class redisTestCase {
 
     @Autowired
+    private JedisPool jedisPool;
+
+    @Autowired
     private RedisTemplate redisTemplate;
 
     Jedis jedis = null;
 
     @Before
     public void open() {
-        jedis = new Jedis("192.168.255.131");
+        jedis = jedisPool.getResource();
     }
 
     @After

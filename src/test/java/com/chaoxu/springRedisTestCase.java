@@ -1,5 +1,6 @@
 package com.chaoxu;
 
+import com.chaoxu.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,16 +16,19 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class springRedisTestCase {
 
     @Autowired
-    private RedisTemplate redisTemplate;
+    private RedisTemplate<String,String> redisTemplate;
+
+    @Autowired
+    //private UserService userService;
 
     @Test
     public void testSet(){
-        redisTemplate.opsForValue().set("name:1","Tom");
+        redisTemplate.opsForValue().set("name:6","赵朝旭");
     }
 
     @Test
     public void testGet(){
-        String name= (String) redisTemplate.opsForValue().get("name:1");
+        String name= redisTemplate.opsForValue().get("name:6");
         System.out.println(name);
     }
 
